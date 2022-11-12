@@ -63,18 +63,19 @@ public class Registro {
         float estimadorSuper = 0;
         float estimadorExtra = 0;
         float estimadorDiesel = 0;
-        do{
+        do {
             total = 0;
             calcularVentasSemanales(numDias);
-            float mayorSuper = (float) Collections.max(this.gasolinaSuper);
-            float mayorExtra = (float) Collections.max(this.extra);
-            float mayorDiesel = (float) Collections.max(this.diesel);
+            float mayorSuper = Math.round((float) Collections.max(this.gasolinaSuper));
+            float mayorExtra = Math.round((float) Collections.max(this.extra));
+            float mayorDiesel = Math.round((float) Collections.max(this.diesel));
+            System.out.println();
             //estimadorSuper = (int) Math.floor((double)(mayorSuper - inventario.getGasolinaSuper()));
             //estimadorExtra = (int) Math.floor((double)(mayorExtra - inventario.getExtra()));
             //estimadorDiesel = (int) Math.floor((double)(mayorDiesel - inventario.getDiesel()));
-            estimadorSuper = (int) (mayorSuper - Float.parseFloat(formato.format((inventario.getGasolinaSuper()/1000))));
-            estimadorExtra = (int) (mayorExtra - Float.parseFloat(formato.format((inventario.getExtra()/1000))));;
-            estimadorDiesel = (int) (mayorDiesel - Float.parseFloat(formato.format((inventario.getDiesel()/1000))));;
+            estimadorSuper = Math.round(mayorSuper - Float.parseFloat(formato.format((inventario.getGasolinaSuper()/1000))));
+            estimadorExtra = Math.round(mayorExtra - Float.parseFloat(formato.format((inventario.getExtra()/1000))));;
+            estimadorDiesel = Math.round(mayorDiesel - Float.parseFloat(formato.format((inventario.getDiesel()/1000))));;
 
             if(estimadorSuper < 0) {
                 estimadorSuper = 0;
@@ -83,9 +84,13 @@ public class Registro {
             total = estimadorSuper + estimadorExtra + estimadorDiesel;
             numDias += 1;
             System.out.println(total);
-        }while(total != 10);
-        System.out.println("El pedido es de: " + estimadorSuper + estimadorExtra + estimadorDiesel);
+        } while(total <= 10);
+        System.out.println("El pedido es de: " +
+                "\nSuper: " + estimadorSuper + "00" +
+                "\nExtra: " + estimadorExtra + "00" +
+                "\nDiesel: "+ estimadorDiesel + "00");
+        System.out.println("Ola bebeese");
+        System.out.println("Dejen de dañar");
     }
-
 
 }
