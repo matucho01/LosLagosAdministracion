@@ -20,17 +20,19 @@ public class Registro {
         this.extra.clear();
         this.diesel.clear();
         Calendar c = Calendar.getInstance();
-        c.set(2022,10,24);
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
-        sdf.format(c.getTime());
+        //sdf.format(c.getTime());
         for(int i=1; i<4; i++){
-            c.add(Calendar.DATE, -7*i);
+            c.set(2022,9,24);
+            c.add(Calendar.DAY_OF_MONTH, -7*i);
             float auxSemanaSuper = 0;
             float auxSemanaExtra = 0;
             float auxSemanaDiesel = 0;
             for (int j=0; j<numDias; j++){
                 Calendar aux = c;
-                aux.add(Calendar.DATE, j);
+                aux.add(Calendar.DAY_OF_MONTH, j);
+                System.out.println(sdf.format(aux.getTime()));
                 List listaAux = lectorDatos.leerDatos(sdf.format(aux.getTime()));
                 auxSemanaSuper += Float.parseFloat(listaAux.get(0).toString());
                 auxSemanaExtra += Float.parseFloat(listaAux.get(1).toString());
@@ -39,8 +41,9 @@ public class Registro {
             this.gasolinaSuper.add(auxSemanaSuper);
             this.extra.add(auxSemanaExtra);
             this.diesel.add(auxSemanaDiesel);
-            System.out.println(this.gasolinaSuper);
+            //System.out.println(this.gasolinaSuper);
         }
+        System.out.println(this.gasolinaSuper);
     }
 
     public void proyectarVentas(){
