@@ -89,6 +89,7 @@ public class Registro {
                 "\nSuper: " + estimadorSuper + "00" +
                 "\nExtra: " + estimadorExtra + "00" +
                 "\nDiesel: "+ estimadorDiesel + "00");
+        System.out.println("Ola bebeese");
     }
 
 
