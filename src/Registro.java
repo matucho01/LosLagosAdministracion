@@ -90,7 +90,7 @@ public class Registro {
                 "\nExtra: " + estimadorExtra + "00" +
                 "\nDiesel: "+ estimadorDiesel + "00");
         System.out.println("Ola bebeese");
+        System.out.println("Dejen de dañar");
     }
-
 
 }
