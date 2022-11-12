@@ -64,6 +64,7 @@ public class Registro {
         float estimadorExtra = 0;
         float estimadorDiesel = 0;
         do{
+            total = 0;
             calcularVentasSemanales(numDias);
             float mayorSuper = (float) Collections.max(this.gasolinaSuper);
             float mayorExtra = (float) Collections.max(this.extra);
