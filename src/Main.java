@@ -3,6 +3,7 @@ public class Main {
 
         LectorDatos lectorDatos = new LectorDatos();
         System.out.println(lectorDatos.leerDatos("15-10-22").toString());
-
+        Registro registro = new Registro();
+        registro.proyectarVentas();
     }
 }
