@@ -30,7 +30,7 @@ public class Registro {
             float auxSemanaExtra = 0;
             float auxSemanaDiesel = 0;
             for (int j=0; j<numDias; j++){
-                Calendar aux = c;
+                Calendar aux = (Calendar) c.clone();
                 aux.add(Calendar.DAY_OF_MONTH, j);
                 System.out.println(sdf.format(aux.getTime()));
                 List listaAux = lectorDatos.leerDatos(sdf.format(aux.getTime()));
@@ -43,15 +43,13 @@ public class Registro {
             this.diesel.add(auxSemanaDiesel);
             //System.out.println(this.gasolinaSuper);
         }
-        System.out.println(this.gasolinaSuper);
+        //System.out.println(this.gasolinaSuper);
     }
 
     public void proyectarVentas(){
         int numDias = 3;
-        calcularVentasSemanales(numDias);
-        float mayorSuper = (float) Collections.max(this.gasolinaSuper);
-        float mayorExtra = (float) Collections.max(this.extra);
-        float mayorDiesel = (float) Collections.max(this.diesel);
+        //calcularVentasSemanales(numDias);
+
 
         int total = 0;
         int estimadorSuper = 0;
@@ -59,6 +57,9 @@ public class Registro {
         int estimadorDiesel = 0;
         do{
             calcularVentasSemanales(numDias);
+            float mayorSuper = (float) Collections.max(this.gasolinaSuper);
+            float mayorExtra = (float) Collections.max(this.extra);
+            float mayorDiesel = (float) Collections.max(this.diesel);
             estimadorSuper = (int) Math.floor((double)(mayorSuper - inventario.getGasolinaSuper()));
             estimadorExtra = (int) Math.floor((double)(mayorExtra - inventario.getExtra()));
             estimadorDiesel = (int) Math.floor((double)(mayorDiesel - inventario.getDiesel()));
