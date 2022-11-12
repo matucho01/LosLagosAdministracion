@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -9,6 +10,8 @@ public class Registro {
     private LectorDatos lectorDatos = new LectorDatos();
     private Inventario inventario = new Inventario();
 
+    DecimalFormat formato = new DecimalFormat("#.#");
+
     public Registro() {
         this.gasolinaSuper = new ArrayList<Float>();
         this.extra = new ArrayList<Float>();
@@ -16,6 +19,7 @@ public class Registro {
     }
 
     public void calcularVentasSemanales(int numDias) {
+
         this.gasolinaSuper.clear();
         this.extra.clear();
         this.diesel.clear();
@@ -23,13 +27,13 @@ public class Registro {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
         //sdf.format(c.getTime());
-        for(int i=1; i<4; i++){
+        for(int i = 1; i < 4; i++){
             c.set(2022,9,24);
             c.add(Calendar.DAY_OF_MONTH, -7*i);
             float auxSemanaSuper = 0;
             float auxSemanaExtra = 0;
             float auxSemanaDiesel = 0;
-            for (int j=0; j<numDias; j++){
+            for (int j = 0; j < numDias; j++){
                 Calendar aux = (Calendar) c.clone();
                 aux.add(Calendar.DAY_OF_MONTH, j);
                 System.out.println(sdf.format(aux.getTime()));
@@ -38,6 +42,10 @@ public class Registro {
                 auxSemanaExtra += Float.parseFloat(listaAux.get(1).toString());
                 auxSemanaDiesel += Float.parseFloat(listaAux.get(2).toString());
             }
+            auxSemanaSuper = Float.parseFloat(formato.format(auxSemanaSuper/1000));
+            auxSemanaExtra = Float.parseFloat(formato.format(auxSemanaExtra/1000));
+            auxSemanaDiesel = Float.parseFloat(formato.format(auxSemanaDiesel/1000));
+
             this.gasolinaSuper.add(auxSemanaSuper);
             this.extra.add(auxSemanaExtra);
             this.diesel.add(auxSemanaDiesel);
@@ -51,22 +59,30 @@ public class Registro {
         //calcularVentasSemanales(numDias);
 
 
-        int total = 0;
-        int estimadorSuper = 0;
-        int estimadorExtra = 0;
-        int estimadorDiesel = 0;
+        float total = 0;
+        float estimadorSuper = 0;
+        float estimadorExtra = 0;
+        float estimadorDiesel = 0;
         do{
             calcularVentasSemanales(numDias);
             float mayorSuper = (float) Collections.max(this.gasolinaSuper);
             float mayorExtra = (float) Collections.max(this.extra);
             float mayorDiesel = (float) Collections.max(this.diesel);
-            estimadorSuper = (int) Math.floor((double)(mayorSuper - inventario.getGasolinaSuper()));
-            estimadorExtra = (int) Math.floor((double)(mayorExtra - inventario.getExtra()));
-            estimadorDiesel = (int) Math.floor((double)(mayorDiesel - inventario.getDiesel()));
+            //estimadorSuper = (int) Math.floor((double)(mayorSuper - inventario.getGasolinaSuper()));
+            //estimadorExtra = (int) Math.floor((double)(mayorExtra - inventario.getExtra()));
+            //estimadorDiesel = (int) Math.floor((double)(mayorDiesel - inventario.getDiesel()));
+            estimadorSuper = (int) (mayorSuper - Float.parseFloat(formato.format((inventario.getGasolinaSuper()/1000))));
+            estimadorExtra = (int) (mayorExtra - Float.parseFloat(formato.format((inventario.getExtra()/1000))));;
+            estimadorDiesel = (int) (mayorDiesel - Float.parseFloat(formato.format((inventario.getDiesel()/1000))));;
+
+            if(estimadorSuper < 0) {
+                estimadorSuper = 0;
+            }
+
             total = estimadorSuper + estimadorExtra + estimadorDiesel;
-            numDias+=1;
+            numDias += 1;
             System.out.println(total);
-        }while(total!=10000);
+        }while(total != 10);
         System.out.println("El pedido es de: " + estimadorSuper + estimadorExtra + estimadorDiesel);
     }
 
