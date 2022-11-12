@@ -10,7 +10,7 @@ public class LectorDatos {
         String splitBy = ",";
         int posicion = 0;
         try{
-            BufferedReader br = new BufferedReader(new FileReader("/Lecturas/lecturas.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("Lecturas/lecturas_octubre.csv"));
             line = br.readLine();
             String[] fechas = line.split(splitBy);
             for(int i=0; i< fechas.length; i++) {
