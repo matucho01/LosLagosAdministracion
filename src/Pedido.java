@@ -10,18 +10,23 @@ public class Pedido {
     private float galonesDiesel;
     private String fechaPedido;
 
+    public Pedido(String fecha){
+        this.fechaPedido = fecha;
+    }
+
     public void crearPedido(){
         try{
             File archivo = new File("pedido.txt");
             if(archivo.createNewFile()){
                 System.out.println("Archivo creado exitosamente.");
                 FileWriter fw = new FileWriter("pedido.txt");
-                List pedido =
-                String pedido = "El pedido es para " + (numDias - 2) + " días: " +
-                        "\nSuper: " + pedido.get(0).toString() + "00" +
-                        "\nExtra: " + pedido.get(1).toString() + "00" +
-                        "\nDiesel: "+ pedido.get(2).toString() + "00" );
-                fw.write("hola");
+                Registro registro = new Registro();
+                List volumenesPedido = registro.proyectarVentas(this.fechaPedido);
+                String pedido = "El pedido es para " + (registro.getNumDias() - 2) + " días: " +
+                        "\nSuper: " + volumenesPedido.get(0).toString() + "00" +
+                        "\nExtra: " + volumenesPedido.get(1).toString() + "00" +
+                        "\nDiesel: "+ volumenesPedido.get(2).toString() + "00" ;
+                fw.write(pedido);
                 fw.close();
             }else{
                 System.out.println("No se puede realizar el pedido.");

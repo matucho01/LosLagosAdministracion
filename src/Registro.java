@@ -9,6 +9,7 @@ public class Registro {
     private List diesel;
     private LectorDatos lectorDatos = new LectorDatos();
     private Inventario inventario = new Inventario();
+    private int numDias;
 
     DecimalFormat formato = new DecimalFormat("#.#");
 
@@ -16,9 +17,10 @@ public class Registro {
         this.gasolinaSuper = new ArrayList<Float>();
         this.extra = new ArrayList<Float>();
         this.diesel = new ArrayList<Float>();
+        this.numDias =3;
     }
 
-    public void calcularVentasSemanales(int numDias, String fecha) {
+    public void calcularVentasSemanales(String fecha) {
 
 
         List tokens = new ArrayList<String>();
@@ -46,7 +48,7 @@ public class Registro {
             float auxSemanaSuper = 0;
             float auxSemanaExtra = 0;
             float auxSemanaDiesel = 0;
-            for (int j = 0; j < numDias; j++){
+            for (int j = 0; j < this.numDias; j++){
                 Calendar aux = (Calendar) c.clone();
                 aux.add(Calendar.DAY_OF_MONTH, j);
                 System.out.println(sdf.format(aux.getTime()));
@@ -68,7 +70,7 @@ public class Registro {
     }
 
     public List proyectarVentas(String fecha){
-        int numDias = 3;
+        //int numDias = 3;
         //calcularVentasSemanales(numDias);
 
         float total = 0;
@@ -92,7 +94,7 @@ public class Registro {
             pedido.add(estimadorSuper);
             pedido.add(estimadorExtra);
             pedido.add(estimadorDiesel);
-            calcularVentasSemanales(numDias, fecha);
+            calcularVentasSemanales(fecha);
             mayorSuper = (float) Collections.max(this.gasolinaSuper);
             mayorExtra = (float) Collections.max(this.extra);
             mayorDiesel = (float) Collections.max(this.diesel);
@@ -114,11 +116,14 @@ public class Registro {
             }
 
             total = estimadorSuper + estimadorExtra + estimadorDiesel;
-            numDias += 1;
+            this.numDias += 1;
             System.out.println(total);
         }
         return pedido;
 
     }
 
+    public int getNumDias() {
+        return numDias;
+    }
 }
