@@ -20,21 +20,18 @@ public class Registro {
 
     public void calcularVentasSemanales(int numDias, String fecha) {
 
-        Scanner sc = new Scanner(System.in);
 
-        System.out.print("Digite la fecha en el formato dd-MM-yyyy para iniciar la proyección del pedido: ");
-        String respuesta = sc.nextLine();
         List tokens = new ArrayList<String>();
 
-        StringTokenizer tkzr = new StringTokenizer(respuesta, "-");
+        StringTokenizer tkzr = new StringTokenizer(fecha, "-");
 
         while(tkzr.hasMoreElements()) {
             tokens.add(tkzr.nextToken());
         }
 
-        int anio = Integer.parseInt(tokens.get(0).toString());
-        int mes = Integer.parseInt(tokens.get(1).toString());
-        int dia = Integer.parseInt(tokens.get(2).toString());
+        int dia = Integer.parseInt(tokens.get(0).toString());
+        int mes = Integer.parseInt(tokens.get(1).toString())-1;
+        int anio = Integer.parseInt(tokens.get(2).toString());
 
         this.gasolinaSuper.clear();
         this.extra.clear();
@@ -70,7 +67,7 @@ public class Registro {
         //System.out.println(this.gasolinaSuper);
     }
 
-    public void proyectarVentas(){
+    public void proyectarVentas(String fecha){
         int numDias = 3;
         //calcularVentasSemanales(numDias);
 
@@ -95,7 +92,7 @@ public class Registro {
             pedido.add(estimadorSuper);
             pedido.add(estimadorExtra);
             pedido.add(estimadorDiesel);
-            calcularVentasSemanales(numDias);
+            calcularVentasSemanales(numDias, fecha);
             mayorSuper = (float) Collections.max(this.gasolinaSuper);
             mayorExtra = (float) Collections.max(this.extra);
             mayorDiesel = (float) Collections.max(this.diesel);
