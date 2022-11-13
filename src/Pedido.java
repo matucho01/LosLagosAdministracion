@@ -22,6 +22,8 @@ public class Pedido {
                 FileWriter fw = new FileWriter("pedido.txt");
                 Registro registro = new Registro();
                 List volumenesPedido = registro.proyectarVentas(this.fechaPedido);
+
+
                 String pedido = "El pedido es para " + (registro.getNumDias() - 2) + " días: " +
                         "\nSuper: " + volumenesPedido.get(0).toString() + "00" +
                         "\nExtra: " + volumenesPedido.get(1).toString() + "00" +
