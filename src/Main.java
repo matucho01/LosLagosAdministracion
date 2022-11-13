@@ -21,6 +21,9 @@ public class Main {
         System.out.print("Descarga en el tanque Diesel: ");
         int descargaDiesel = Integer.parseInt(sc.nextLine());
         inventario.registrarDescarga(descargaSuper,descargaExtra,descargaDiesel);
+        System.out.println("La cantidad de combustible en los tanques en la siguiente:");
+        System.out.println("Tanque Super: "+inventario.getGalonesSuper()+"\nTanque Extra: "+inventario.getGalonesExtra()
+        +"\nTanque Diesel: "+inventario.getGalonesDiesel());
 
         System.out.print("Generando Pedido");
         Pedido p = new Pedido("24-10-2022",inventario);
