@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class LectorDatos {
     public List leerDatos(String fecha) {
@@ -18,10 +17,9 @@ public class LectorDatos {
                     posicion = i;
                 }
             }
-            while ((line = br.readLine()) != null)   //returns a Boolean value
+            while ((line = br.readLine()) != null)
             {
-                String[] datos = line.split(splitBy);    // use comma as separator
-                //System.out.println("Employee [First Name=" + employee[0] + ", Last Name=" + employee[1] + ", Designation=" + employee[2] + ", Contact=" + employee[3] + ", Salary= " + employee[4] + ", City= " + employee[5] +"]");
+                String[] datos = line.split(splitBy);
                 consumoDiario.add(datos[posicion]);
             }
         }catch (IOException e){

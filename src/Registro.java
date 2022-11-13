@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Registro {
 
-    private List gasolinaSuper;
-    private List extra;
-    private List diesel;
+    private List consumoSuper;
+    private List consumoExtra;
+    private List consumoDiesel;
     private LectorDatos lectorDatos = new LectorDatos();
     private Inventario inventario = new Inventario();
     private int numDias;
@@ -14,15 +14,13 @@ public class Registro {
     DecimalFormat formato = new DecimalFormat("#.#");
 
     public Registro() {
-        this.gasolinaSuper = new ArrayList<Float>();
-        this.extra = new ArrayList<Float>();
-        this.diesel = new ArrayList<Float>();
+        this.consumoSuper = new ArrayList<Float>();
+        this.consumoExtra = new ArrayList<Float>();
+        this.consumoDiesel = new ArrayList<Float>();
         this.numDias =3;
     }
 
     public void calcularVentasSemanales(String fecha) {
-
-
         List tokens = new ArrayList<String>();
 
         StringTokenizer tkzr = new StringTokenizer(fecha, "-");
@@ -35,13 +33,12 @@ public class Registro {
         int mes = Integer.parseInt(tokens.get(1).toString())-1;
         int anio = Integer.parseInt(tokens.get(2).toString());
 
-        this.gasolinaSuper.clear();
-        this.extra.clear();
-        this.diesel.clear();
+        this.consumoSuper.clear();
+        this.consumoExtra.clear();
+        this.consumoDiesel.clear();
         Calendar c = Calendar.getInstance();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
-        //sdf.format(c.getTime());
         for(int i = 1; i < 4; i++){
             c.set(anio,mes,dia);
             c.add(Calendar.DAY_OF_MONTH, -7*i);
@@ -61,17 +58,13 @@ public class Registro {
             auxSemanaExtra = Float.parseFloat(formato.format(auxSemanaExtra/1000));
             auxSemanaDiesel = Float.parseFloat(formato.format(auxSemanaDiesel/1000));
 
-            this.gasolinaSuper.add(auxSemanaSuper);
-            this.extra.add(auxSemanaExtra);
-            this.diesel.add(auxSemanaDiesel);
-            //System.out.println(this.gasolinaSuper);
+            this.consumoSuper.add(auxSemanaSuper);
+            this.consumoExtra.add(auxSemanaExtra);
+            this.consumoDiesel.add(auxSemanaDiesel);
         }
-        //System.out.println(this.gasolinaSuper);
     }
 
     public List proyectarVentas(String fecha){
-        //int numDias = 3;
-        //calcularVentasSemanales(numDias);
 
         float total = 0;
         float estimadorSuper = 0;
@@ -83,11 +76,7 @@ public class Registro {
         float mayorDiesel = 0;
 
         List pedido = new ArrayList<Float>();
-        /*
-        do {
 
-        } while(total <= 10);
-*/
         while(total <= 10){
             total = 0;
             pedido.clear();
@@ -95,21 +84,18 @@ public class Registro {
             pedido.add(estimadorExtra);
             pedido.add(estimadorDiesel);
             calcularVentasSemanales(fecha);
-            mayorSuper = (float) Collections.max(this.gasolinaSuper);
-            mayorExtra = (float) Collections.max(this.extra);
-            mayorDiesel = (float) Collections.max(this.diesel);
+            mayorSuper = (float) Collections.max(this.consumoSuper);
+            mayorExtra = (float) Collections.max(this.consumoExtra);
+            mayorDiesel = (float) Collections.max(this.consumoDiesel);
 
             System.out.println(mayorSuper);
             System.out.println(mayorExtra);
             System.out.println(mayorDiesel);
             System.out.println(numDias);
 
-            //estimadorSuper = (int) Math.floor((double)(mayorSuper - inventario.getGasolinaSuper()));
-            //estimadorExtra = (int) Math.floor((double)(mayorExtra - inventario.getExtra()));
-            //estimadorDiesel = (int) Math.floor((double)(mayorDiesel - inventario.getDiesel()));
-            estimadorSuper = Math.round(mayorSuper - Float.parseFloat(formato.format((inventario.getGasolinaSuper()/1000))));
-            estimadorExtra = Math.round(mayorExtra - Float.parseFloat(formato.format((inventario.getExtra()/1000))));;
-            estimadorDiesel = Math.round(mayorDiesel - Float.parseFloat(formato.format((inventario.getDiesel()/1000))));;
+            estimadorSuper = Math.round(mayorSuper - Float.parseFloat(formato.format((inventario.getGalonesSuper()/1000))));
+            estimadorExtra = Math.round(mayorExtra - Float.parseFloat(formato.format((inventario.getGalonesExtra()/1000))));;
+            estimadorDiesel = Math.round(mayorDiesel - Float.parseFloat(formato.format((inventario.getGalonesDiesel()/1000))));;
 
             if(estimadorSuper < 0) {
                 estimadorSuper = 0;

@@ -16,10 +16,11 @@ public class Pedido {
 
     public void crearPedido(){
         try{
-            File archivo = new File("pedido.txt");
+            String nombreArchivo = "pedido"+fechaPedido+".txt";
+            File archivo = new File(nombreArchivo);
             if(archivo.createNewFile()){
                 System.out.println("Archivo creado exitosamente.");
-                FileWriter fw = new FileWriter("pedido.txt");
+                FileWriter fw = new FileWriter(nombreArchivo);
                 Registro registro = new Registro();
                 List volumenesPedido = registro.proyectarVentas(this.fechaPedido);
                 this.galonesSuper = (float)volumenesPedido.get(0);
@@ -36,8 +37,6 @@ public class Pedido {
             }else{
                 System.out.println("No se puede realizar el pedido.");
             }
-
-
         }catch(IOException e){
             e.printStackTrace();
         }
