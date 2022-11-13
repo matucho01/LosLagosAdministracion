@@ -58,20 +58,36 @@ public class Registro {
         int numDias = 3;
         //calcularVentasSemanales(numDias);
 
-
         float total = 0;
         float estimadorSuper = 0;
         float estimadorExtra = 0;
         float estimadorDiesel = 0;
+
+        float mayorSuper = 0;
+        float mayorExtra = 0;
+        float mayorDiesel = 0;
+
+        List pedido = new ArrayList<Float>();
+        /*
         do {
+
+        } while(total <= 10);
+*/
+        while(total <= 10){
             total = 0;
+            pedido.clear();
+            pedido.add(estimadorSuper);
+            pedido.add(estimadorExtra);
+            pedido.add(estimadorDiesel);
             calcularVentasSemanales(numDias);
-            float mayorSuper = (float) Collections.max(this.gasolinaSuper);
-            float mayorExtra = (float) Collections.max(this.extra);
-            float mayorDiesel = (float) Collections.max(this.diesel);
+            mayorSuper = (float) Collections.max(this.gasolinaSuper);
+            mayorExtra = (float) Collections.max(this.extra);
+            mayorDiesel = (float) Collections.max(this.diesel);
+
             System.out.println(mayorSuper);
             System.out.println(mayorExtra);
             System.out.println(mayorDiesel);
+            System.out.println(numDias);
 
             //estimadorSuper = (int) Math.floor((double)(mayorSuper - inventario.getGasolinaSuper()));
             //estimadorExtra = (int) Math.floor((double)(mayorExtra - inventario.getExtra()));
@@ -87,13 +103,11 @@ public class Registro {
             total = estimadorSuper + estimadorExtra + estimadorDiesel;
             numDias += 1;
             System.out.println(total);
-        } while(total <= 10);
-        System.out.println("El pedido es de: " +
-                "\nSuper: " + estimadorSuper + "00" +
-                "\nExtra: " + estimadorExtra + "00" +
-                "\nDiesel: "+ estimadorDiesel + "00");
-        System.out.println("Ola bebeese");
-        System.out.println("Dejen de dañar");
+        }
+        System.out.println("El pedido es para " + (numDias - 2) + " días: " +
+                "\nSuper: " + pedido.get(0).toString() + "00" +
+                "\nExtra: " + pedido.get(1).toString() + "00" +
+                "\nDiesel: "+ pedido.get(2).toString() + "00" );
     }
 
 }
