@@ -2,25 +2,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         Inventario inventario = new Inventario();
-        System.out.println("Digite el nivel de los tanques: ");
-        System.out.print("Nivel tanque Super: ");
-        float nivelSuper = Float.parseFloat(sc.nextLine());
-        System.out.print("Nivel tanque Extra: ");
-        float nivelExtra = Float.parseFloat(sc.nextLine());
-        System.out.print("Nivel tanque Diesel: ");
-        float nivelDiesel = Float.parseFloat(sc.nextLine());
-        inventario.actualizarNivelTanque(nivelSuper,nivelExtra,nivelDiesel);
+        System.out.println("Nivel tanque Super: 0.265");
+        System.out.println("Nivel tanque Extra: 0.78");
+        System.out.println("Nivel tanque Diesel: 0.56");
+        inventario.actualizarNivelTanque(0.265f,0.78f,0.56f);
 
-        System.out.println("Ingresa las descargas realizadas en los tanques: ");
-        System.out.print("Descarga en el tanque Super: ");
-        int descargaSuper = Integer.parseInt(sc.nextLine());
-        System.out.print("Descarga en el tanque Extra: ");
-        int descargaExtra = Integer.parseInt(sc.nextLine());
-        System.out.print("Descarga en el tanque Diesel: ");
-        int descargaDiesel = Integer.parseInt(sc.nextLine());
-        inventario.registrarDescarga(descargaSuper,descargaExtra,descargaDiesel);
+        System.out.println("Descarga en el tanque Super: 0");
+        System.out.println("Descarga en el tanque Extra: 6000");
+        System.out.println("Descarga en el tanque Diesel: 3000");
+        inventario.registrarDescarga(0,6000,3000);
         System.out.println("La cantidad de combustible en los tanques en la siguiente:");
         System.out.println("Tanque Super: "+inventario.getGalonesSuper()+"\nTanque Extra: "+inventario.getGalonesExtra()
         +"\nTanque Diesel: "+inventario.getGalonesDiesel());
