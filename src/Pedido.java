@@ -9,9 +9,11 @@ public class Pedido {
     private float galonesExtra;
     private float galonesDiesel;
     private String fechaPedido;
+    private Inventario inventario;
 
-    public Pedido(String fecha){
+    public Pedido(String fecha,Inventario inventario){
         this.fechaPedido = fecha;
+        this.inventario = inventario;
     }
 
     public void crearPedido(){
@@ -22,7 +24,7 @@ public class Pedido {
                 System.out.println("Archivo creado exitosamente.");
                 FileWriter fw = new FileWriter(nombreArchivo);
                 Registro registro = new Registro();
-                List volumenesPedido = registro.proyectarVentas(this.fechaPedido);
+                List volumenesPedido = registro.proyectarVentas(this.fechaPedido,this.inventario.getGalonesSuper(),this.inventario.getGalonesExtra(),this.inventario.getGalonesDiesel());
                 this.galonesSuper = (float)volumenesPedido.get(0);
                 this.galonesExtra = (float)volumenesPedido.get(1);
                 this.galonesDiesel = (float)volumenesPedido.get(2);

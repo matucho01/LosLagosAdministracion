@@ -8,7 +8,6 @@ public class Registro {
     private List consumoExtra;
     private List consumoDiesel;
     private LectorDatos lectorDatos = new LectorDatos();
-    private Inventario inventario = new Inventario();
     private int numDias;
 
     DecimalFormat formato = new DecimalFormat("#.#");
@@ -48,7 +47,6 @@ public class Registro {
             for (int j = 0; j < this.numDias; j++){
                 Calendar aux = (Calendar) c.clone();
                 aux.add(Calendar.DAY_OF_MONTH, j);
-                System.out.println(sdf.format(aux.getTime()));
                 List listaAux = lectorDatos.leerDatos(sdf.format(aux.getTime()));
                 auxSemanaSuper += Float.parseFloat(listaAux.get(0).toString());
                 auxSemanaExtra += Float.parseFloat(listaAux.get(1).toString());
@@ -64,7 +62,7 @@ public class Registro {
         }
     }
 
-    public List proyectarVentas(String fecha){
+    public List proyectarVentas(String fecha,float galonesSuper,float galonesExtra,float galonesDiesel){
 
         float total = 0;
         float estimadorSuper = 0;
@@ -88,14 +86,9 @@ public class Registro {
             mayorExtra = (float) Collections.max(this.consumoExtra);
             mayorDiesel = (float) Collections.max(this.consumoDiesel);
 
-            System.out.println(mayorSuper);
-            System.out.println(mayorExtra);
-            System.out.println(mayorDiesel);
-            System.out.println(numDias);
-
-            estimadorSuper = Math.round(mayorSuper - Float.parseFloat(formato.format((inventario.getGalonesSuper()/1000))));
-            estimadorExtra = Math.round(mayorExtra - Float.parseFloat(formato.format((inventario.getGalonesExtra()/1000))));;
-            estimadorDiesel = Math.round(mayorDiesel - Float.parseFloat(formato.format((inventario.getGalonesDiesel()/1000))));;
+            estimadorSuper = Math.round(mayorSuper - Float.parseFloat(formato.format((galonesSuper/1000))));
+            estimadorExtra = Math.round(mayorExtra - Float.parseFloat(formato.format((galonesExtra/1000))));;
+            estimadorDiesel = Math.round(mayorDiesel - Float.parseFloat(formato.format((galonesDiesel/1000))));;
 
             if(estimadorSuper < 0) {
                 estimadorSuper = 0;
@@ -103,7 +96,6 @@ public class Registro {
 
             total = estimadorSuper + estimadorExtra + estimadorDiesel;
             this.numDias += 1;
-            System.out.println(total);
         }
         return pedido;
 
