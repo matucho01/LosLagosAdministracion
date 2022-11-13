@@ -66,10 +66,13 @@ public class Registro {
         do {
             total = 0;
             calcularVentasSemanales(numDias);
-            float mayorSuper = Math.round((float) Collections.max(this.gasolinaSuper));
-            float mayorExtra = Math.round((float) Collections.max(this.extra));
-            float mayorDiesel = Math.round((float) Collections.max(this.diesel));
-            System.out.println();
+            float mayorSuper = (float) Collections.max(this.gasolinaSuper);
+            float mayorExtra = (float) Collections.max(this.extra);
+            float mayorDiesel = (float) Collections.max(this.diesel);
+            System.out.println(mayorSuper);
+            System.out.println(mayorExtra);
+            System.out.println(mayorDiesel);
+
             //estimadorSuper = (int) Math.floor((double)(mayorSuper - inventario.getGasolinaSuper()));
             //estimadorExtra = (int) Math.floor((double)(mayorExtra - inventario.getExtra()));
             //estimadorDiesel = (int) Math.floor((double)(mayorDiesel - inventario.getDiesel()));
