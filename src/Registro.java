@@ -67,7 +67,7 @@ public class Registro {
         //System.out.println(this.gasolinaSuper);
     }
 
-    public void proyectarVentas(String fecha){
+    public List proyectarVentas(String fecha){
         int numDias = 3;
         //calcularVentasSemanales(numDias);
 
@@ -117,10 +117,8 @@ public class Registro {
             numDias += 1;
             System.out.println(total);
         }
-        System.out.println("El pedido es para " + (numDias - 2) + " días: " +
-                "\nSuper: " + pedido.get(0).toString() + "00" +
-                "\nExtra: " + pedido.get(1).toString() + "00" +
-                "\nDiesel: "+ pedido.get(2).toString() + "00" );
+        return pedido;
+
     }
 
 }
