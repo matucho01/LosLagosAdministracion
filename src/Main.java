@@ -6,8 +6,6 @@ public class Main {
 
         System.out.print("Digite la fecha en el formato dd-MM-yyyy para iniciar la proyección del pedido: ");
         String respuesta = sc.nextLine();
-        Registro registro = new Registro();
-
-        registro.proyectarVentas(respuesta);
+        Pedido p = new Pedido(respuesta);
     }
 }
