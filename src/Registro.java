@@ -20,6 +20,22 @@ public class Registro {
 
     public void calcularVentasSemanales(int numDias, String fecha) {
 
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Digite la fecha en el formato dd-MM-yyyy para iniciar la proyección del pedido: ");
+        String respuesta = sc.nextLine();
+        List tokens = new ArrayList<String>();
+
+        StringTokenizer tkzr = new StringTokenizer(respuesta, "-");
+
+        while(tkzr.hasMoreElements()) {
+            tokens.add(tkzr.nextToken());
+        }
+
+        int anio = Integer.parseInt(tokens.get(0).toString());
+        int mes = Integer.parseInt(tokens.get(1).toString());
+        int dia = Integer.parseInt(tokens.get(2).toString());
+
         this.gasolinaSuper.clear();
         this.extra.clear();
         this.diesel.clear();
@@ -28,7 +44,7 @@ public class Registro {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
         //sdf.format(c.getTime());
         for(int i = 1; i < 4; i++){
-            c.set(2022,9,24);
+            c.set(anio,mes,dia);
             c.add(Calendar.DAY_OF_MONTH, -7*i);
             float auxSemanaSuper = 0;
             float auxSemanaExtra = 0;
