@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventario {
-    private float gasolinaSuper = 400;
-    private float extra = 5800;
-    private float diesel = 3400;
+    private float gasolinaSuper;
+    private float extra;
+    private float diesel;
 
     public void registrarDescarga(int volumenSuper, int volumenExtra, int volumenDiesel) {
         this.gasolinaSuper += volumenSuper;

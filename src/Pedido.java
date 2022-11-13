@@ -22,12 +22,14 @@ public class Pedido {
                 FileWriter fw = new FileWriter("pedido.txt");
                 Registro registro = new Registro();
                 List volumenesPedido = registro.proyectarVentas(this.fechaPedido);
-
+                this.galonesSuper = (float)volumenesPedido.get(0);
+                this.galonesExtra = (float)volumenesPedido.get(1);
+                this.galonesDiesel = (float)volumenesPedido.get(2);
 
                 String pedido = "El pedido es para " + (registro.getNumDias() - 2) + " días: " +
-                        "\nSuper: " + volumenesPedido.get(0).toString() + "00" +
-                        "\nExtra: " + volumenesPedido.get(1).toString() + "00" +
-                        "\nDiesel: "+ volumenesPedido.get(2).toString() + "00" +
+                        "\nSuper: " + this.galonesSuper + "00" +
+                        "\nExtra: " + this.galonesExtra + "00" +
+                        "\nDiesel: "+ this.galonesDiesel + "00" +
                         "\nRevisado por: Gerente";
                 fw.write(pedido);
                 fw.close();
