@@ -18,7 +18,7 @@ public class Registro {
         this.diesel = new ArrayList<Float>();
     }
 
-    public void calcularVentasSemanales(int numDias) {
+    public void calcularVentasSemanales(int numDias, String fecha) {
 
         this.gasolinaSuper.clear();
         this.extra.clear();
