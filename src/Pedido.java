@@ -41,10 +41,9 @@ public class Pedido {
 
                 fw.write(pedido);
                 fw.close();
-            }else{
-                System.out.println("No se puede realizar el pedido");
             }
         }catch(IOException e) {
+            System.out.print("No se puede crear el archivo con el pedido, error: ");
             e.printStackTrace();
         }
     }
