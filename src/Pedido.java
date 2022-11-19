@@ -17,16 +17,23 @@ public class Pedido {
     }
 
     public void crearPedido() {
-        if (crearArchivo() != null) {
-            try {
-                FileWriter fw = new FileWriter(crearArchivo());
-                Registro registro = new Registro();
-                List volumenesPedido = registro.proyectarVentas(this.fechaPedido, this.inventario.getGalonesSuper(), this.inventario.getGalonesExtra(), this.inventario.getGalonesDiesel());
-                this.galonesSuper = (float) volumenesPedido.get(0);
-                this.galonesExtra = (float) volumenesPedido.get(1);
-                this.galonesDiesel = (float) volumenesPedido.get(2);
+        Registro registro = new Registro();
+        List volumenesPedido = registro.proyectarVentas(this.fechaPedido, this.inventario.getGalonesSuper(), this.inventario.getGalonesExtra(), this.inventario.getGalonesDiesel());
+        this.galonesSuper = (float) volumenesPedido.get(0);
+        this.galonesExtra = (float) volumenesPedido.get(1);
+        this.galonesDiesel = (float) volumenesPedido.get(2);
+        crearArchivo(registro.getNumDias());
+    }
 
-                String pedido = "El pedido es para " + (registro.getNumDias() - 2) + " días: " +
+    public void crearArchivo(int numDias) {
+        try {
+            String nombreArchivo = "pedido"+fechaPedido+".txt";
+            File archivo = new File(nombreArchivo);
+            if(archivo.createNewFile()) {
+                System.out.println("Archivo creado exitosamente");
+                FileWriter fw = new FileWriter(nombreArchivo);
+
+                String pedido = "El pedido es para " + (numDias - 2) + " días: " +
                         "\nSuper: " + this.galonesSuper + "00" +
                         "\nExtra: " + this.galonesExtra + "00" +
                         "\nDiesel: " + this.galonesDiesel + "00" +
@@ -34,29 +41,11 @@ public class Pedido {
 
                 fw.write(pedido);
                 fw.close();
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("No se puede crear pedido");
-        }
-    }
-
-    public String crearArchivo() {
-        try {
-            String nombreArchivo = "pedido"+fechaPedido+".txt";
-            File archivo = new File(nombreArchivo);
-            if(archivo.createNewFile()) {
-                System.out.println("Archivo creado exitosamente");
-                return nombreArchivo;
             }else{
                 System.out.println("No se puede realizar el pedido");
-                return null;
             }
         }catch(IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
-
 }
