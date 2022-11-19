@@ -4,7 +4,6 @@ public class Main {
     public static void main(String[] args) {
         Inventario inventario = new Inventario();
         inventario.actualizarNivelTanque(0.265f,0.78f,0.56f);
-        inventario.imprimirNivelTanques();
 
         inventario.registrarDescarga(0,6000,3000);
         System.out.println("La cantidad de combustible en los tanques en la siguiente:");
