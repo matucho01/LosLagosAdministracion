@@ -22,6 +22,12 @@ public class Inventario {
         }
     }
 
+    public void imprimirNivelTanques() {
+        System.out.println("Nivel tanque Super: " + this.galonesSuper);
+        System.out.println("Nivel tanque Extra: " + this.galonesExtra);
+        System.out.println("Nivel tanque Diesel: " + this.galonesDiesel);
+    }
+
     public float getGalonesSuper() {
         return galonesSuper;
     }
