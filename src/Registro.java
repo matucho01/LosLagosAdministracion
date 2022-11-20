@@ -78,10 +78,6 @@ public class Registro {
         float estimadorExtra = 0;
         float estimadorDiesel = 0;
 
-        float mayorSuper = 0;
-        float mayorExtra = 0;
-        float mayorDiesel = 0;
-
         List pedido = new ArrayList<Float>();
 
         while(total <= 10){
