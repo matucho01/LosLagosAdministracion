@@ -25,7 +25,7 @@ public class Pedido {
         crearArchivo(registro.getNumDias());
     }
 
-    public void crearArchivo(int numDias) {
+    private void crearArchivo(int numDias) {
         try {
             String nombreArchivo = "pedido"+fechaPedido+".txt";
             File archivo = new File(nombreArchivo);
