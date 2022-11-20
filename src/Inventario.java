@@ -33,6 +33,7 @@ public class Inventario {
     }
 
     public void imprimirNivelTanques() {
+        System.out.println("La cantidad de combustible en los tanques es la siguiente: ");
         System.out.println("Nivel tanque Super: " + this.galonesSuper);
         System.out.println("Nivel tanque Extra: " + this.galonesExtra);
         System.out.println("Nivel tanque Diesel: " + this.galonesDiesel);
