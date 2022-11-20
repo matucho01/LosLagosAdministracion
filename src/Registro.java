@@ -69,7 +69,8 @@ public class Registro {
     }
 
     private float formatearGalones(float galones) {
-        return Float.parseFloat(formato.format((galones/1000)));
+        float galonesNormalizados = galones/1000;
+        return Float.parseFloat(formato.format((galonesNormalizados)));
     }
 
     public List proyectarVentas(String fecha,float galonesSuper,float galonesExtra,float galonesDiesel){
