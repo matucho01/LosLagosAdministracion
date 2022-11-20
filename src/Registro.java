@@ -41,9 +41,9 @@ public class Registro {
                 auxSemanaExtra += Float.parseFloat(listaAux.get(1).toString());
                 auxSemanaDiesel += Float.parseFloat(listaAux.get(2).toString());
             }
-            auxSemanaSuper = Float.parseFloat(formato.format(auxSemanaSuper/1000));
-            auxSemanaExtra = Float.parseFloat(formato.format(auxSemanaExtra/1000));
-            auxSemanaDiesel = Float.parseFloat(formato.format(auxSemanaDiesel/1000));
+            auxSemanaSuper = formatearGalones(auxSemanaSuper);
+            auxSemanaExtra = formatearGalones(auxSemanaExtra);
+            auxSemanaDiesel = formatearGalones(auxSemanaDiesel);
 
             this.consumoSuper.add(auxSemanaSuper);
             this.consumoExtra.add(auxSemanaExtra);
@@ -68,6 +68,10 @@ public class Registro {
         return elementosFecha;
     }
 
+    public float formatearGalones(float galones) {
+        return Float.parseFloat(formato.format((galones/1000)));
+    }
+
     public List proyectarVentas(String fecha,float galonesSuper,float galonesExtra,float galonesDiesel){
 
         float total = 0;
@@ -85,9 +89,9 @@ public class Registro {
             pedido.add(estimadorDiesel);
             calcularVentasSemanales(fecha);
 
-            estimadorSuper = Math.round(obtenerMayor().get(0) - Float.parseFloat(formato.format((galonesSuper/1000))));
-            estimadorExtra = Math.round(obtenerMayor().get(1) - Float.parseFloat(formato.format((galonesExtra/1000))));;
-            estimadorDiesel = Math.round(obtenerMayor().get(2) - Float.parseFloat(formato.format((galonesDiesel/1000))));;
+            estimadorSuper = Math.round(obtenerMayor().get(0) - formatearGalones(galonesSuper));
+            estimadorExtra = Math.round(obtenerMayor().get(1) - formatearGalones(galonesExtra));;
+            estimadorDiesel = Math.round(obtenerMayor().get(2) - formatearGalones(galonesDiesel));;
 
             if(estimadorSuper < 0) {
                 estimadorSuper = 0;
@@ -97,7 +101,6 @@ public class Registro {
             this.numDias += 1;
         }
         return pedido;
-
     }
 
     public ArrayList<Float> obtenerMayor() {
