@@ -91,13 +91,10 @@ public class Registro {
             pedido.add(estimadorExtra);
             pedido.add(estimadorDiesel);
             calcularVentasSemanales(fecha);
-            mayorSuper = (float) Collections.max(this.consumoSuper);
-            mayorExtra = (float) Collections.max(this.consumoExtra);
-            mayorDiesel = (float) Collections.max(this.consumoDiesel);
 
-            estimadorSuper = Math.round(mayorSuper - Float.parseFloat(formato.format((galonesSuper/1000))));
-            estimadorExtra = Math.round(mayorExtra - Float.parseFloat(formato.format((galonesExtra/1000))));;
-            estimadorDiesel = Math.round(mayorDiesel - Float.parseFloat(formato.format((galonesDiesel/1000))));;
+            estimadorSuper = Math.round((float) Collections.max(this.consumoSuper) - Float.parseFloat(formato.format((galonesSuper/1000))));
+            estimadorExtra = Math.round((float) Collections.max(this.consumoExtra) - Float.parseFloat(formato.format((galonesExtra/1000))));;
+            estimadorDiesel = Math.round((float) Collections.max(this.consumoDiesel) - Float.parseFloat(formato.format((galonesDiesel/1000))));;
 
             if(estimadorSuper < 0) {
                 estimadorSuper = 0;
