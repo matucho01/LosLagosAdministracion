@@ -88,9 +88,9 @@ public class Registro {
             pedido.add(estimadorDiesel);
             calcularVentasSemanales(fecha);
 
-            estimadorSuper = Math.round((float) Collections.max(this.consumoSuper) - Float.parseFloat(formato.format((galonesSuper/1000))));
-            estimadorExtra = Math.round((float) Collections.max(this.consumoExtra) - Float.parseFloat(formato.format((galonesExtra/1000))));;
-            estimadorDiesel = Math.round((float) Collections.max(this.consumoDiesel) - Float.parseFloat(formato.format((galonesDiesel/1000))));;
+            estimadorSuper = Math.round(obtenerMayor().get(0) - Float.parseFloat(formato.format((galonesSuper/1000))));
+            estimadorExtra = Math.round(obtenerMayor().get(1) - Float.parseFloat(formato.format((galonesExtra/1000))));;
+            estimadorDiesel = Math.round(obtenerMayor().get(2) - Float.parseFloat(formato.format((galonesDiesel/1000))));;
 
             if(estimadorSuper < 0) {
                 estimadorSuper = 0;
@@ -101,6 +101,14 @@ public class Registro {
         }
         return pedido;
 
+    }
+
+    public ArrayList<Float> obtenerMayor() {
+        ArrayList<Float> mayores = new ArrayList<>();
+        mayores.add((float) Collections.max(this.consumoSuper));
+        mayores.add((float) Collections.max(this.consumoExtra));
+        mayores.add((float) Collections.max(this.consumoDiesel));
+        return mayores;
     }
 
     public int getNumDias() {
