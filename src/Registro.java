@@ -60,14 +60,11 @@ public class Registro {
             tokens.add(tkzr.nextToken());
         }
 
-        int dia = Integer.parseInt(tokens.get(0).toString());
-        int mes = Integer.parseInt(tokens.get(1).toString())-1;
-        int anio = Integer.parseInt(tokens.get(2).toString());
-
         ArrayList elementosFecha = new ArrayList<Integer>();
-        elementosFecha.add(dia);
-        elementosFecha.add(mes);
-        elementosFecha.add(anio);
+
+        elementosFecha.add(Integer.parseInt(tokens.get(0).toString()));
+        elementosFecha.add(Integer.parseInt(tokens.get(1).toString())-1);
+        elementosFecha.add(Integer.parseInt(tokens.get(2).toString()));
         return elementosFecha;
     }
 
