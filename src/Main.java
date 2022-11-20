@@ -7,8 +7,7 @@ public class Main {
 
         inventario.registrarDescarga(0,6000,3000);
         System.out.println("La cantidad de combustible en los tanques en la siguiente:");
-        System.out.println("Tanque Super: "+inventario.getGalonesSuper()+"\nTanque Extra: "+inventario.getGalonesExtra()
-        +"\nTanque Diesel: "+inventario.getGalonesDiesel());
+        inventario.imprimirNivelTanques();
 
         System.out.print("Generando Pedido");
         Pedido p = new Pedido("24-10-2022",inventario);
