@@ -16,14 +16,12 @@ public class Registro {
         this.consumoSuper = new ArrayList<Float>();
         this.consumoExtra = new ArrayList<Float>();
         this.consumoDiesel = new ArrayList<Float>();
-        this.numDias =3;
+        this.numDias = 3;
     }
 
     private void calcularVentasSemanales(String fecha) {
         ArrayList<Integer> elementosFecha = tokenizarFecha(fecha);
-        this.consumoSuper.clear();
-        this.consumoExtra.clear();
-        this.consumoDiesel.clear();
+        reiniciarConsumos();
         Calendar c = Calendar.getInstance();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
@@ -49,6 +47,12 @@ public class Registro {
             this.consumoExtra.add(auxSemanaExtra);
             this.consumoDiesel.add(auxSemanaDiesel);
         }
+    }
+
+    private void reiniciarConsumos() {
+        this.consumoSuper.clear();
+        this.consumoExtra.clear();
+        this.consumoDiesel.clear();
     }
 
     private ArrayList<Integer> tokenizarFecha(String fecha) {
