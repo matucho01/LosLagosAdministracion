@@ -20,18 +20,7 @@ public class Registro {
     }
 
     public void calcularVentasSemanales(String fecha) {
-        List tokens = new ArrayList<String>();
-
-        StringTokenizer tkzr = new StringTokenizer(fecha, "-");
-
-        while(tkzr.hasMoreElements()) {
-            tokens.add(tkzr.nextToken());
-        }
-
-        int dia = Integer.parseInt(tokens.get(0).toString());
-        int mes = Integer.parseInt(tokens.get(1).toString())-1;
-        int anio = Integer.parseInt(tokens.get(2).toString());
-
+        ArrayList<Integer> elementosFecha = tokenizarFecha(fecha);
         this.consumoSuper.clear();
         this.consumoExtra.clear();
         this.consumoDiesel.clear();
@@ -39,7 +28,7 @@ public class Registro {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
         for(int i = 1; i < 4; i++){
-            c.set(anio,mes,dia);
+            c.set(elementosFecha.get(2),elementosFecha.get(1),elementosFecha.get(0));
             c.add(Calendar.DAY_OF_MONTH, -7*i);
             float auxSemanaSuper = 0;
             float auxSemanaExtra = 0;
@@ -60,6 +49,26 @@ public class Registro {
             this.consumoExtra.add(auxSemanaExtra);
             this.consumoDiesel.add(auxSemanaDiesel);
         }
+    }
+
+    public ArrayList<Integer> tokenizarFecha(String fecha) {
+        List tokens = new ArrayList<String>();
+
+        StringTokenizer tkzr = new StringTokenizer(fecha, "-");
+
+        while(tkzr.hasMoreElements()) {
+            tokens.add(tkzr.nextToken());
+        }
+
+        int dia = Integer.parseInt(tokens.get(0).toString());
+        int mes = Integer.parseInt(tokens.get(1).toString())-1;
+        int anio = Integer.parseInt(tokens.get(2).toString());
+
+        ArrayList elementosFecha = new ArrayList<Integer>();
+        elementosFecha.add(dia);
+        elementosFecha.add(mes);
+        elementosFecha.add(anio);
+        return elementosFecha;
     }
 
     public List proyectarVentas(String fecha,float galonesSuper,float galonesExtra,float galonesDiesel){
