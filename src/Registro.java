@@ -19,7 +19,7 @@ public class Registro {
         this.numDias =3;
     }
 
-    public void calcularVentasSemanales(String fecha) {
+    private void calcularVentasSemanales(String fecha) {
         ArrayList<Integer> elementosFecha = tokenizarFecha(fecha);
         this.consumoSuper.clear();
         this.consumoExtra.clear();
@@ -51,7 +51,7 @@ public class Registro {
         }
     }
 
-    public ArrayList<Integer> tokenizarFecha(String fecha) {
+    private ArrayList<Integer> tokenizarFecha(String fecha) {
         List tokens = new ArrayList<String>();
 
         StringTokenizer tkzr = new StringTokenizer(fecha, "-");
@@ -68,7 +68,7 @@ public class Registro {
         return elementosFecha;
     }
 
-    public float formatearGalones(float galones) {
+    private float formatearGalones(float galones) {
         return Float.parseFloat(formato.format((galones/1000)));
     }
 
@@ -103,7 +103,7 @@ public class Registro {
         return pedido;
     }
 
-    public ArrayList<Float> obtenerMayor() {
+    private ArrayList<Float> obtenerMayor() {
         ArrayList<Float> mayores = new ArrayList<>();
         mayores.add((float) Collections.max(this.consumoSuper));
         mayores.add((float) Collections.max(this.consumoExtra));
